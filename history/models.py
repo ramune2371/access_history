@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.utils.timezone import localtime
 import re
 
 # ip アドレスのバリデーション用
@@ -22,3 +23,5 @@ class AccessHistory(models.Model):
     # ページ表示する際に使用
     def __str__(self) -> str:
         return "ip : %s / access time : %s" % (self.ip,self.access_time)
+    def get_locale_time(self):
+        return localtime(self.access_time)
